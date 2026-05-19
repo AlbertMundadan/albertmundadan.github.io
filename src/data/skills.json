@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Frontend",
+    "items": ["React", "JavaScript", "Tailwind CSS", "Vite"]
+  },
+  {
+    "title": "Backend",
+    "items": ["Node.js", "Supabase", "REST APIs", "SQL"]
+  },
+  {
+    "title": "Engineering",
+    "items": ["Git", "Python", "LTSpice", "Circuit Design"]
+  }
+]

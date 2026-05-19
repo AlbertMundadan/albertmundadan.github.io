@@ -1,7 +1,7 @@
 function ProjectCard({ project }) {
   if (project.isPlaceholder) {
     return (
-      <article className="flex h-[19rem] w-full max-w-[24.25rem] flex-col overflow-hidden rounded-lg border border-dashed border-[color:var(--outline-variant)]/30 bg-[color:rgba(42,42,42,0.4)]">
+      <article className="flex h-[20rem] w-full max-w-[24.25rem] flex-col overflow-hidden rounded-lg border border-dashed border-[color:var(--outline-variant)]/30 bg-[color:rgba(42,42,42,0.4)]">
         <div className="aspect-[16/9] w-full max-h-[7.35rem] shrink-0 border-b border-dashed border-[color:var(--outline-variant)]/20 bg-[color:rgba(53,53,53,0.3)]" />
         <div className="flex flex-1 flex-col justify-center px-4 py-4 text-center">
           <h3 className="font-['Libre_Caslon_Text'] text-[1.08rem] font-bold leading-tight text-[color:var(--outline)]">
@@ -16,7 +16,7 @@ function ProjectCard({ project }) {
   }
 
   return (
-    <article className="group flex h-[19rem] w-full max-w-[24.25rem] flex-col overflow-hidden rounded-lg border border-[color:var(--outline-variant)]/15 bg-[var(--surface-container-high)] shadow-[0_8px_24px_rgba(0,0,0,0.14)] transition-all duration-300 hover:-translate-y-1 hover:border-[color:var(--secondary)]/18 hover:shadow-[0_14px_30px_rgba(0,0,0,0.2)]">
+    <article className="group flex h-[20rem] w-full max-w-[24.25rem] flex-col overflow-hidden rounded-lg border border-[color:var(--outline-variant)]/15 bg-[var(--surface-container-high)] shadow-[0_8px_24px_rgba(0,0,0,0.14)] transition-all duration-300 hover:-translate-y-1 hover:border-[color:var(--secondary)]/18 hover:shadow-[0_14px_30px_rgba(0,0,0,0.2)]">
       <div className="aspect-[16/9] w-full max-h-[7.35rem] shrink-0 overflow-hidden border-b border-[color:var(--outline-variant)]/10 bg-[var(--surface-container-highest)]">
         {project.imageSrc ? (
           <img
@@ -42,7 +42,7 @@ function ProjectCard({ project }) {
           </h3>
         </div>
 
-        <p className="project-description-clamp mb-3.5 font-['Space_Mono'] text-[0.8rem] leading-[1.24rem] text-[var(--on-surface-variant)]">
+        <p className="project-description-clamp mb-3 font-sans text-[0.8rem] leading-[1.08rem] font-medium text-[var(--on-surface-variant)]">
           {project.description}
         </p>
 
@@ -50,7 +50,7 @@ function ProjectCard({ project }) {
           {project.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full border border-[color:var(--secondary)]/24 bg-[color:var(--secondary)]/4 px-2.75 py-1 font-['Space_Mono'] text-[0.7rem] font-bold uppercase tracking-[0.08em] text-[var(--secondary)]"
+              className="rounded-full border border-[color:var(--secondary)]/24 bg-[color:var(--secondary)]/4 px-2.5 py-1 font-sans text-[0.65rem] font-semibold tracking-[0.02em] text-[var(--secondary)]"
             >
               {tag}
             </span>
@@ -60,10 +60,10 @@ function ProjectCard({ project }) {
         <div className="mt-auto flex gap-2 pb-3">
           <button
             type="button"
-            className="inline-flex items-center gap-1 rounded-full bg-[var(--secondary)] px-3.5 py-1.5 font-['Space_Mono'] text-[0.64rem] font-bold uppercase tracking-[0.1em] text-[var(--primary-container)] shadow-[0_0_12px_rgba(200,198,197,0.16)] transition-transform hover:scale-105"
+            className="inline-flex items-center gap-1.5 rounded-full bg-[var(--secondary)] px-4.5 py-2 font-['Space_Mono'] text-[0.73rem] font-bold uppercase tracking-[0.08em] text-[var(--primary-container)] shadow-[0_0_12px_rgba(200,198,197,0.16)] transition-transform hover:scale-105"
           >
             Details
-            <span aria-hidden="true" className="text-[0.72rem] leading-none">
+            <span aria-hidden="true" className="text-[0.9rem] leading-none">
               ↗
             </span>
           </button>
@@ -72,10 +72,10 @@ function ProjectCard({ project }) {
               href={project.code}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1 rounded-full border border-[color:var(--secondary)]/36 px-3.5 py-1.5 font-['Space_Mono'] text-[0.64rem] font-bold uppercase tracking-[0.1em] text-[var(--secondary)] transition-colors hover:bg-[color:var(--secondary)]/6"
+              className="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--secondary)]/36 px-4.5 py-2 font-['Space_Mono'] text-[0.73rem] font-bold uppercase tracking-[0.08em] text-[var(--secondary)] transition-colors hover:bg-[color:var(--secondary)]/6"
             >
               Code
-              <span aria-hidden="true" className="text-[0.72rem] leading-none">
+              <span aria-hidden="true" className="text-[0.9rem] leading-none">
                 &lt;&gt;
               </span>
             </a>

@@ -3,8 +3,11 @@ import headshot from './assets/images/Headshot.jpg'
 import headerMark from './assets/images/Name.png'
 import { ProjectCard } from './components/index.js'
 import projectData from './data/projects.json'
+import experienceData from './data/experience.json'
+import skillData from './data/skills.json'
+import certificationData from './data/certifications.json'
 
-const projectImages = import.meta.glob('./assets/images/*', {
+const imageAssets = import.meta.glob('./assets/images/*', {
   eager: true,
   import: 'default',
 })
@@ -13,32 +16,21 @@ const projects = projectData.map((project, index) => ({
   ...project,
   id: `${project.title}-${index}`,
   imageSrc: project.imageSrc
-    ? projectImages[`./assets/images/${project.imageSrc}`] ?? null
+    ? imageAssets[`./assets/images/${project.imageSrc}`] ?? null
     : null,
 }))
 
-const experience = [
-  {
-    company: 'Airbnb',
-    role: 'Senior Product Designer',
-    dates: '2021 - Present',
-  },
-  {
-    company: 'Google',
-    role: 'Interaction Designer',
-    dates: '2018 - 2021',
-  },
-  {
-    company: 'Dropbox',
-    role: 'Product Designer',
-    dates: '2016 - 2018',
-  },
-]
+const experience = experienceData.map((item, index) => ({
+  ...item,
+  id: `${item.company}-${index}`,
+  logoSrc: item.logo ? imageAssets[`./assets/images/${item.logo}`] ?? null : null,
+}))
 
 const navLinks = [
-  { label: 'About', href: '#about' },
   { label: 'Projects', href: '#projects' },
   { label: 'Experience', href: '#experience' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Certifications', href: '#certifications' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -120,7 +112,7 @@ function App() {
         <img
           src={headerMark}
           alt="Albert Mundadan"
-          className="ml-auto h-4.5 w-auto object-contain md:ml-0 md:h-[1.7rem]"
+          className="ml-auto h-4.5 w-auto object-contain md:ml-0 md:h-[1.8rem]"
         />
         <div className="flex items-center gap-3.5">
           <nav className="hidden gap-8 md:flex">
@@ -128,7 +120,7 @@ function App() {
               <a
                 key={link.href}
                 href={link.href}
-                className="font-['Space_Mono'] text-[13px] font-bold uppercase tracking-[0.16em] text-[var(--on-surface-variant)] transition-colors duration-500 hover:text-[var(--secondary)]"
+                className="font-['Space_Mono'] text-[12px] font-bold uppercase tracking-[0.16em] text-[var(--on-surface-variant)] transition-colors duration-500 hover:text-[var(--secondary)]"
               >
                 {link.label}
               </a>
@@ -211,7 +203,7 @@ function App() {
               ))}
             </div>
 
-            <div className="mt-9 flex items-center justify-center gap-2.5 pb-2.5">
+            <div className="mt-5 flex items-center justify-center gap-2.5">
               <button
                 type="button"
                 aria-label="Previous project page"
@@ -263,37 +255,8 @@ function App() {
         </section>
 
         <section
-          id="about"
-          className="bg-[var(--surface-container-lowest)] px-3.5 py-18 md:px-10"
-        >
-          <div className="mx-auto grid max-w-[72rem] grid-cols-1 items-start gap-5 md:grid-cols-2">
-            <div className="md:sticky md:top-22">
-              <span className="mb-2 block font-['Space_Mono'] text-[8px] font-bold uppercase tracking-[0.18em] text-[var(--secondary)]">
-                About
-              </span>
-              <h2 className="max-w-sm font-['Libre_Caslon_Text'] text-[27px] leading-[32px] text-[var(--on-surface)]">
-                A cinematic visual style paired with product thinking and
-                engineering curiosity.
-              </h2>
-            </div>
-            <div className="space-y-4.5 font-['Space_Mono'] text-[0.74rem] leading-5 text-[var(--on-surface-variant)]">
-              <p>
-                I&apos;m interested in interface design, front-end engineering, and
-                building products that feel deliberate from the first interaction
-                to the final detail.
-              </p>
-              <p>
-                My work sits between visual systems and implementation, with a
-                focus on typography, motion, and the structure that makes
-                experiences feel clear and memorable.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section
           id="experience"
-          className="bg-[var(--surface-container-low)] px-3.5 py-18 md:px-10"
+          className="bg-background px-3.5 py-18 md:px-10"
         >
           <div className="mx-auto grid max-w-[72rem] grid-cols-1 items-start gap-5 md:grid-cols-2">
             <div className="md:sticky md:top-22">
@@ -307,15 +270,30 @@ function App() {
             <div className="space-y-4.5">
               {experience.map((item) => (
                 <div
-                  key={item.company}
+                  key={item.id}
                   className="border-b border-[color:var(--outline-variant)]/10 pb-2"
                 >
-                  <h4 className="text-[0.86rem] font-bold text-[var(--on-background)]">
-                    {item.company}
-                  </h4>
-                  <p className="font-['Space_Mono'] text-[0.65rem] text-[var(--on-surface-variant)]">
-                    {item.role} • {item.dates}
-                  </p>
+                  <div className="flex items-start gap-3">
+                    {item.logoSrc ? (
+                      <img
+                        src={item.logoSrc}
+                        alt={`${item.company} logo`}
+                        className="mt-0.5 h-7 w-7 shrink-0 rounded-sm object-contain"
+                      />
+                    ) : null}
+                    <div>
+                      <h4 className="text-[0.86rem] font-bold text-[var(--on-background)]">
+                        {item.company}
+                      </h4>
+                      <p className="font-['Space_Mono'] text-[0.65rem] text-[var(--on-surface-variant)]">
+                        {item.role}
+                      </p>
+                      <p className="font-['Space_Mono'] text-[0.6rem] text-[color:var(--outline)]">
+                        {item.dateRange}
+                        {item.location ? ` • ${item.location}` : ''}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               ))}
 
@@ -330,11 +308,80 @@ function App() {
             </div>
           </div>
         </section>
+
+        <section
+          id="skills"
+          className="bg-[var(--surface-container-lowest)] px-3.5 py-18 md:px-10"
+        >
+          <div className="mx-auto grid max-w-[72rem] grid-cols-1 items-start gap-5 md:grid-cols-2">
+            <div className="md:sticky md:top-22">
+              <span className="mb-2 block font-['Space_Mono'] text-[8px] font-bold uppercase tracking-[0.18em] text-[var(--secondary)]">
+                Skills
+              </span>
+              <h2 className="max-w-sm font-['Libre_Caslon_Text'] text-[27px] leading-[32px] text-[var(--on-surface)]">
+                Tools and technologies I use to design and build software.
+              </h2>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2">
+              {skillData.map((group) => (
+                <div
+                  key={group.title}
+                  className="rounded-lg border border-[color:var(--outline-variant)]/18 bg-[color:rgba(27,28,28,0.78)] px-4 py-4"
+                >
+                  <h3 className="mb-3 font-['Libre_Caslon_Text'] text-[1rem] text-[var(--on-background)]">
+                    {group.title}
+                  </h3>
+                  <div className="flex flex-wrap gap-1.5">
+                    {group.items.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-full border border-[color:var(--secondary)]/24 bg-[color:var(--secondary)]/4 px-2.5 py-1 font-sans text-[0.62rem] font-semibold tracking-[0.02em] text-[var(--secondary)]"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="certifications"
+          className="bg-[var(--surface-container-low)] px-3.5 py-18 md:px-10"
+        >
+          <div className="mx-auto grid max-w-[72rem] grid-cols-1 items-start gap-5 md:grid-cols-2">
+            <div className="md:sticky md:top-22">
+              <span className="mb-2 block font-['Space_Mono'] text-[8px] font-bold uppercase tracking-[0.18em] text-[var(--secondary)]">
+                Certifications
+              </span>
+              <h2 className="max-w-sm font-['Libre_Caslon_Text'] text-[27px] leading-[32px] text-[var(--on-surface)]">
+                Credentials and formal learning milestones.
+              </h2>
+            </div>
+            <div className="space-y-4">
+              {certificationData.map((item) => (
+                <div
+                  key={item.title}
+                  className="rounded-lg border border-[color:var(--outline-variant)]/16 bg-[color:rgba(31,32,32,0.8)] px-4 py-4"
+                >
+                  <h3 className="font-['Libre_Caslon_Text'] text-[1rem] text-[var(--on-background)]">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 font-['Space_Mono'] text-[0.68rem] leading-[1.1rem] text-[var(--on-surface-variant)]">
+                    {item.issuer}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
       </main>
 
       <footer
         id="contact"
-        className="flex w-full flex-col items-center justify-between gap-5 border-t border-[color:var(--outline-variant)]/10 bg-[var(--background)] px-3.5 py-5 md:flex-row md:px-10"
+        className="flex w-full flex-col items-center justify-between gap-5 border-t border-[color:var(--outline-variant)]/10 bg-[var(--surface-container-lowest)] px-3.5 py-5 md:flex-row md:px-10"
       >
         <span className="font-['Libre_Caslon_Text'] text-[1.05rem] tracking-tight text-[var(--on-background)]">
           ALBERT

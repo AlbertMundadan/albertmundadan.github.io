@@ -5,10 +5,10 @@
   color-scheme: dark;
   --primary: #c8c6c5;
   --secondary: #c6c7c5;
-  --tertiary: #f8b8a0;
+  --tertiary: #f8cfa0;
   --background: #131313;
-  --surface-container-lowest: #0e0e0e;
-  --surface-container-low: #1b1c1c;
+  --surface-container-lowest:#1b1c1c; 
+  --surface-container-low: #292929;
   --surface-container: #1f2020;
   --surface-container-high: #2a2a2a;
   --surface-container-highest: #353535;
@@ -61,4 +61,10 @@ body {
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
+}
+
+@media (max-width: 767px) {
+  .project-description-clamp {
+    -webkit-line-clamp: 2;
+  }
 }
