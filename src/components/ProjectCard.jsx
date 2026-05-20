@@ -17,7 +17,7 @@ function ProjectCard({ project }) {
 
   return (
     <article className="group flex h-[20rem] w-full max-w-[24.25rem] flex-col overflow-hidden rounded-lg border border-[color:var(--outline-variant)]/15 bg-[var(--surface-container-high)] shadow-[0_8px_24px_rgba(0,0,0,0.14)] transition-all duration-300 hover:-translate-y-1 hover:border-[color:var(--secondary)]/18 hover:shadow-[0_14px_30px_rgba(0,0,0,0.2)]">
-      <div className="aspect-[16/9] w-full max-h-[7.35rem] shrink-0 overflow-hidden border-b border-[color:var(--outline-variant)]/10 bg-[var(--surface-container-highest)]">
+      <div className="aspect-[16/9] w-full max-h-[8.5rem] shrink-0 overflow-hidden border-b border-[color:var(--outline-variant)]/10 bg-[var(--surface-container-highest)]">
         {project.imageSrc ? (
           <img
             src={project.imageSrc}
@@ -42,11 +42,11 @@ function ProjectCard({ project }) {
           </h3>
         </div>
 
-        <p className="project-description-clamp mb-3 font-sans text-[0.8rem] leading-[1.08rem] font-medium text-[var(--on-surface-variant)]">
+        <p className="project-description-clamp mb-3 font-sans text-[0.75rem] leading-[1.08rem] font-medium text-[var(--on-surface-variant)]">
           {project.description}
         </p>
 
-        <div className="mb-3.5 flex flex-wrap gap-1.5">
+        <div className="mb-3 flex flex-wrap gap-1.5">
           {project.tags.map((tag) => (
             <span
               key={tag}
@@ -55,31 +55,6 @@ function ProjectCard({ project }) {
               {tag}
             </span>
           ))}
-        </div>
-
-        <div className="mt-auto flex gap-2 pb-3">
-          <button
-            type="button"
-            className="inline-flex items-center gap-1.5 rounded-full bg-[var(--secondary)] px-4.5 py-2 font-['Space_Mono'] text-[0.73rem] font-bold uppercase tracking-[0.08em] text-[var(--primary-container)] shadow-[0_0_12px_rgba(200,198,197,0.16)] transition-transform hover:scale-105"
-          >
-            Details
-            <span aria-hidden="true" className="text-[0.9rem] leading-none">
-              ↗
-            </span>
-          </button>
-          {project.code ? (
-            <a
-              href={project.code}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--secondary)]/36 px-4.5 py-2 font-['Space_Mono'] text-[0.73rem] font-bold uppercase tracking-[0.08em] text-[var(--secondary)] transition-colors hover:bg-[color:var(--secondary)]/6"
-            >
-              Code
-              <span aria-hidden="true" className="text-[0.9rem] leading-none">
-                &lt;&gt;
-              </span>
-            </a>
-          ) : null}
         </div>
       </div>
     </article>

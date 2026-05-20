@@ -1,14 +1,16 @@
 [
   {
     "title": "HQG Dashboard",
+    "categories": ["Software", "Data Science"],
     "description": "An internal web platform for the Husky Quantitative Group / UConn. It provides a unified interface for managing live portfolios.",
-    "tags": ["Next.js", "Tailwind", "Supabase"],
+    "tags": ["Next.js", "Tailwind", "Supabase", "AWS", "Docker", "React.js"],
     "icon": "◉",
     "imageSrc": "HQG_DB_preview.png",
     "code": "https://github.com/Husky-Quantitative-Group/hqg-dashboard"
   },
   {
     "title": "Environmental Temp/Light ADC",
+    "categories": ["Hardware"],
     "description": "Designed and constructed an analog-to-digital converter using op-amps to provide a visual representation of environmental conditions.",
     "tags": ["LTSpice", "Hardware", "Circuit Design"],
     "icon": "+",
@@ -17,6 +19,7 @@
   },
   {
     "title": "Echo Analytics",
+    "categories": ["Data Science", "Software"],
     "description": "A powerful data visualization dashboard tailored for enterprise-scale marketing teams.",
     "tags": ["Vue.js", "D3.js", "Python"],
     "icon": "▣",
@@ -25,6 +28,7 @@
   },
   {
     "title": "Nexus UI",
+    "categories": ["Software"],
     "description": "An open-source component library prioritizing accessibility and cinematic motion design.",
     "tags": ["React", "Framer", "Storybook"],
     "icon": "◇",
@@ -33,6 +37,7 @@
   },
   {
     "title": "Echo Analytics",
+    "categories": ["Data Science", "Software"],
     "description": "A powerful data visualization dashboard tailored for enterprise-scale marketing teams.",
     "tags": ["Vue.js", "D3.js", "Python"],
     "icon": "▣",
@@ -41,6 +46,7 @@
   },
     {
     "title": "Echo Analytics",
+    "categories": ["Data Science", "Software"],
     "description": "A powerful data visualization dashboard tailored for enterprise-scale marketing teams.",
     "tags": ["Vue.js", "D3.js", "Python"],
     "icon": "▣",
@@ -49,6 +55,7 @@
   },
   {
     "title": "Echo Analytics",
+    "categories": ["Data Science", "Software"],
     "description": "A powerful data visualization dashboard tailored for enterprise-scale marketing teams.",
     "tags": ["Vue.js", "D3.js", "Python"],
     "icon": "▣",

@@ -34,6 +34,8 @@ const navLinks = [
   { label: 'Contact', href: '#contact' },
 ]
 
+const projectFilters = ['All', 'Software', 'Hardware', 'Data Science']
+
 function createPlaceholderProject(index) {
   return {
     id: `coming-soon-${index}`,
@@ -57,6 +59,7 @@ function getProjectLayout(width) {
 
 function App() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const [activeProjectFilter, setActiveProjectFilter] = useState('All')
   const [projectLayout, setProjectLayout] = useState(() => {
     if (typeof window === 'undefined') {
       return { columns: 3, pageSize: 6 }
@@ -77,17 +80,28 @@ function App() {
     return () => window.removeEventListener('resize', updateProjectLayout)
   }, [])
 
+  const filteredProjects =
+    activeProjectFilter === 'All'
+      ? projects
+      : projects.filter((project) =>
+          project.categories?.includes(activeProjectFilter),
+        )
+
+  const projectStartIndex = currentProjectPage * projectLayout.pageSize
   const totalProjectPages = Math.max(
     1,
-    Math.ceil(projects.length / projectLayout.pageSize),
+    Math.ceil(filteredProjects.length / projectLayout.pageSize),
   )
 
   useEffect(() => {
     setCurrentProjectPage((page) => Math.min(page, totalProjectPages - 1))
   }, [totalProjectPages])
 
-  const projectStartIndex = currentProjectPage * projectLayout.pageSize
-  const visibleProjects = projects.slice(
+  useEffect(() => {
+    setCurrentProjectPage(0)
+  }, [activeProjectFilter, projectLayout.pageSize])
+
+  const visibleProjects = filteredProjects.slice(
     projectStartIndex,
     projectStartIndex + projectLayout.pageSize,
   )
@@ -185,10 +199,27 @@ function App() {
           className="bg-[var(--surface-container)] px-3.5 py-9 md:px-10"
         >
           <div className="mx-auto max-w-[72rem]">
-            <div className="mb-7 text-left">
-              <span className="block font-['Space_Mono'] text-[1.2rem] font-bold uppercase tracking-[0.18em] text-[var(--secondary)] md:text-[1.2rem]">
+            <div className="mb-3 text-left">
+              <span className="block font-['Space_Mono'] text-[1.2rem] font-bold uppercase tracking-[0.18em] text-[var(--secondary)] md:text-[1.3rem]">
                 Projects
               </span>
+            </div>
+
+            <div className="mb-5 flex flex-wrap gap-2">
+              {projectFilters.map((filter) => (
+                <button
+                  key={filter}
+                  type="button"
+                  onClick={() => setActiveProjectFilter(filter)}
+                  className={`rounded-full px-3 py-1.5 font-['Space_Mono'] text-[0.63rem] font-bold uppercase tracking-[0.12em] transition-colors ${
+                    activeProjectFilter === filter
+                      ? 'bg-[var(--secondary)] text-[var(--primary-container)]'
+                      : 'border border-[color:var(--secondary)]/24 bg-[color:var(--secondary)]/4 text-[var(--secondary)] hover:bg-[color:var(--secondary)]/10'
+                  }`}
+                >
+                  {filter}
+                </button>
+              ))}
             </div>
 
             <div
@@ -260,12 +291,10 @@ function App() {
         >
           <div className="mx-auto grid max-w-[72rem] grid-cols-1 items-start gap-5 md:grid-cols-2">
             <div className="md:sticky md:top-22">
-              <span className="mb-2 block font-['Space_Mono'] text-[8px] font-bold uppercase tracking-[0.18em] text-[var(--secondary)]">
+              <span className="block font-['Space_Mono'] text-[1.2rem] font-bold uppercase tracking-[0.18em] text-[var(--secondary)] md:text-[1.3rem]">
                 Experience
               </span>
-              <h2 className="max-w-sm font-['Libre_Caslon_Text'] text-[27px] leading-[32px] text-[var(--on-surface)]">
-                Over a decade of shaping digital products at scale.
-              </h2>
+
             </div>
             <div className="space-y-4.5">
               {experience.map((item) => (
