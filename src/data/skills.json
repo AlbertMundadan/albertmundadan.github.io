@@ -1,14 +1,18 @@
 [
   {
     "title": "Frontend",
-    "items": ["React", "JavaScript", "Tailwind CSS", "Vite"]
+    "items": ["React", "JavaScript", "Tailwind CSS", "Vite", "Figma"]
   },
   {
     "title": "Backend",
-    "items": ["Node.js", "Supabase", "REST APIs", "SQL"]
+    "items": ["Node.js", "REST APIs", "SQL", "Python"]
   },
   {
-    "title": "Engineering",
-    "items": ["Git", "Python", "LTSpice", "Circuit Design"]
+    "title": "Embedded / Hardware",
+    "items": ["Arduino", "Circuit Design", "LTSpice", "MATLAB"]
+  },
+  {
+    "title": "Tools",
+    "items": ["Git", "Autodesk Inventor", "3D Printing", "Microsoft Office", "Google Workspace"]
   }
 ]

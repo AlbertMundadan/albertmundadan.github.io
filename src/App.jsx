@@ -7,7 +7,7 @@ import experienceData from './data/experience.json'
 import skillData from './data/skills.json'
 import certificationData from './data/certifications.json'
 
-const imageAssets = import.meta.glob('./assets/images/*', {
+const imageAssets = import.meta.glob('./assets/images/**/*', {
   eager: true,
   import: 'default',
 })
@@ -16,14 +16,14 @@ const projects = projectData.map((project, index) => ({
   ...project,
   id: `${project.title}-${index}`,
   imageSrc: project.imageSrc
-    ? imageAssets[`./assets/images/${project.imageSrc}`] ?? null
+    ? imageAssets[`./assets/images/projects/${project.imageSrc}`] ?? null
     : null,
 }))
 
 const experience = experienceData.map((item, index) => ({
   ...item,
   id: `${item.company}-${index}`,
-  logoSrc: item.logo ? imageAssets[`./assets/images/${item.logo}`] ?? null : null,
+  logoSrc: item.logo ? imageAssets[`./assets/images/logos/${item.logo}`] ?? null : null,
 }))
 
 const navLinks = [
@@ -199,7 +199,7 @@ function App() {
           className="bg-[var(--surface-container)] px-3.5 py-9 md:px-10"
         >
           <div className="mx-auto max-w-[72rem]">
-            <div className="mb-3 text-left">
+            <div className="mb-4 text-left">
               <span className="block font-['Space_Mono'] text-[1.2rem] font-bold uppercase tracking-[0.18em] text-[var(--secondary)] md:text-[1.3rem]">
                 Projects
               </span>
@@ -287,40 +287,73 @@ function App() {
 
         <section
           id="experience"
-          className="bg-background px-3.5 py-18 md:px-10"
+          className="bg-background px-3.5 py-9 md:px-10"
         >
-          <div className="mx-auto grid max-w-[72rem] grid-cols-1 items-start gap-5 md:grid-cols-2">
-            <div className="md:sticky md:top-22">
+          <div className="mx-auto max-w-[72rem]">
+            <div>
               <span className="block font-['Space_Mono'] text-[1.2rem] font-bold uppercase tracking-[0.18em] text-[var(--secondary)] md:text-[1.3rem]">
                 Experience
               </span>
-
             </div>
-            <div className="space-y-4.5">
+            <div className="mt-4 space-y-6 md:mt-5 md:mx-30 lg:ml-55 lg:mr-40">
               {experience.map((item) => (
                 <div
                   key={item.id}
-                  className="border-b border-[color:var(--outline-variant)]/10 pb-2"
+                  className="border-b border-[color:var(--outline-variant)]/50 pb-3"
                 >
-                  <div className="flex items-start gap-3">
-                    {item.logoSrc ? (
-                      <img
-                        src={item.logoSrc}
-                        alt={`${item.company} logo`}
-                        className="mt-0.5 h-7 w-7 shrink-0 rounded-sm object-contain"
-                      />
-                    ) : null}
-                    <div>
-                      <h4 className="text-[0.86rem] font-bold text-[var(--on-background)]">
-                        {item.company}
-                      </h4>
-                      <p className="font-['Space_Mono'] text-[0.65rem] text-[var(--on-surface-variant)]">
-                        {item.role}
-                      </p>
-                      <p className="font-['Space_Mono'] text-[0.6rem] text-[color:var(--outline)]">
-                        {item.dateRange}
-                        {item.location ? ` • ${item.location}` : ''}
-                      </p>
+                  <div className="flex flex-col gap-2.5 md:grid md:grid-cols-[minmax(0,1fr)_18rem] md:items-start md:gap-8">
+                    <div className="flex min-w-0 items-start gap-3.5 md:gap-4">
+                      {item.logoSrc ? (
+                        <img
+                          src={item.logoSrc}
+                          alt={`${item.company} logo`}
+                          className="mt-0.5 h-9 w-9 rounded-sm shrink-0 object-contain md:h-10 md:w-10"
+                        />
+                      ) : null}
+                      <div className="min-h-[3.25rem]">
+                        <h4 className="text-[0.96rem] font-bold text-[var(--on-background)] md:text-[1.02rem]">
+                          {item.company}
+                        </h4>
+                        <p className="font-['Space_Mono'] text-[0.75rem] text-[var(--on-surface-variant)] md:text-[0.8rem]">
+                          {item.role}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="space-y-1 font-['Space_Mono'] text-[0.7rem] text-[color:var(--outline)] md:w-[12rem] md:justify-self-end md:text-[0.76rem]">
+                      <div className="grid grid-cols-[0.875rem_1fr] items-center gap-x-2">
+                        <svg
+                          aria-hidden="true"
+                          viewBox="0 0 24 24"
+                          className="h-3.5 w-3.5 shrink-0 text-[var(--outline)]"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <rect x="3" y="4" width="18" height="18" rx="2" />
+                          <path d="M16 2v4M8 2v4M3 10h18" />
+                        </svg>
+                        <p>{item.dateRange}</p>
+                      </div>
+                      {item.location ? (
+                        <div className="grid grid-cols-[0.875rem_1fr] items-center gap-x-2">
+                          <svg
+                            aria-hidden="true"
+                            viewBox="0 0 24 24"
+                            className="h-3.5 w-3.5 shrink-0 text-[var(--outline)]"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.8"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z" />
+                            <circle cx="12" cy="10" r="2.5" />
+                          </svg>
+                          <p>{item.location}</p>
+                        </div>
+                      ) : null}
                     </div>
                   </div>
                 </div>
@@ -329,7 +362,7 @@ function App() {
               <div className="pt-1">
                 <button
                   type="button"
-                  className="border border-[var(--secondary)] px-4.5 py-2 font-['Space_Mono'] text-[8px] font-bold uppercase tracking-[0.16em] text-[var(--secondary)] transition-all duration-300 hover:bg-[var(--secondary)] hover:text-[var(--primary-container)]"
+                  className="border border-[var(--secondary)] px-5 py-2.5 font-['Space_Mono'] text-[0.68rem] font-bold uppercase tracking-[0.16em] text-[var(--secondary)] transition-all duration-300 hover:bg-[var(--secondary)] hover:text-[var(--primary-container)]"
                 >
                   View Full Resume
                 </button>
@@ -342,20 +375,17 @@ function App() {
           id="skills"
           className="bg-[var(--surface-container-lowest)] px-3.5 py-18 md:px-10"
         >
-          <div className="mx-auto grid max-w-[72rem] grid-cols-1 items-start gap-5 md:grid-cols-2">
-            <div className="md:sticky md:top-22">
-              <span className="mb-2 block font-['Space_Mono'] text-[8px] font-bold uppercase tracking-[0.18em] text-[var(--secondary)]">
+          <div className="mx-auto max-w-[72rem]">
+            <div className="mb-5">
+              <span className="block font-['Space_Mono'] text-[1.2rem] font-bold uppercase tracking-[0.18em] text-[var(--secondary)] md:text-[1.3rem]">
                 Skills
               </span>
-              <h2 className="max-w-sm font-['Libre_Caslon_Text'] text-[27px] leading-[32px] text-[var(--on-surface)]">
-                Tools and technologies I use to design and build software.
-              </h2>
             </div>
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-4 lg:ml-55 lg:mr-20 lg:max-w-[47rem] lg:grid-cols-2">
               {skillData.map((group) => (
                 <div
                   key={group.title}
-                  className="rounded-lg border border-[color:var(--outline-variant)]/18 bg-[color:rgba(27,28,28,0.78)] px-4 py-4"
+                  className="w-full rounded-lg border border-[color:var(--outline-variant)]/18 bg-[color:rgba(27,28,28,0.78)] px-4 py-4"
                 >
                   <h3 className="mb-3 font-['Libre_Caslon_Text'] text-[1rem] text-[var(--on-background)]">
                     {group.title}
@@ -382,12 +412,9 @@ function App() {
         >
           <div className="mx-auto grid max-w-[72rem] grid-cols-1 items-start gap-5 md:grid-cols-2">
             <div className="md:sticky md:top-22">
-              <span className="mb-2 block font-['Space_Mono'] text-[8px] font-bold uppercase tracking-[0.18em] text-[var(--secondary)]">
+              <span className="block font-['Space_Mono'] text-[1.2rem] font-bold uppercase tracking-[0.18em] text-[var(--secondary)] md:text-[1.3rem]">
                 Certifications
               </span>
-              <h2 className="max-w-sm font-['Libre_Caslon_Text'] text-[27px] leading-[32px] text-[var(--on-surface)]">
-                Credentials and formal learning milestones.
-              </h2>
             </div>
             <div className="space-y-4">
               {certificationData.map((item) => (

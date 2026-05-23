@@ -1,23 +1,37 @@
 [
   {
-    "company": "Airbnb",
-    "logo": "",
-    "dateRange": "2021 - Present",
-    "role": "Senior Product Designer",
-    "location": ""
+    "company": "Husky Quantitative Group",
+    "logo": "hqg_logo.png",
+    "dateRange": "Aug 2025 - Present",
+    "role": "Developer / Analyst ",
+    "location": "Storrs, CT"
   },
   {
-    "company": "Google",
-    "logo": "",
-    "dateRange": "2018 - 2021",
-    "role": "Interaction Designer",
-    "location": ""
+    "company": "Hillside Ventures",
+    "logo": "hillside_logo.png",
+    "dateRange": "Aug 2025 - Dec 2025",
+    "role": "Analyst",
+    "location": "Storrs, CT"
   },
   {
-    "company": "Dropbox",
-    "logo": "",
-    "dateRange": "2016 - 2018",
-    "role": "Product Designer",
-    "location": ""
+    "company": "Mediaocean",
+    "logo": "mediaocean_logo.png",
+    "dateRange": "June 2025 - Aug 2025",
+    "role": "Software Engineer Intern",
+    "location": "New York City, NY"
+  },
+    {
+    "company": "UConn Innovation Shop",
+    "logo": "uconn_logo.png",
+    "dateRange": "Sept 2024 - Dec 2025",
+    "role": "Shop Assistant",
+    "location": "Storrs, CT"
+  },
+  {
+    "company": "UConn Math Department",
+    "logo": "uconn_logo.png",
+    "dateRange": "Sept 2024 - Dec 2024",
+    "role": "Calculus I Teaching Assistant",
+    "location": "Storrs, CT"
   }
 ]
