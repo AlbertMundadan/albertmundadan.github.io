@@ -164,7 +164,7 @@ function HomePage() {
       <main className="relative flex-1 pt-13">
         <section className="backdrop-glow relative px-3.5 py-14 pt-9 md:px-10 md:py-14">
           <div className="mx-auto flex max-w-[72rem] flex-col gap-5 md:flex-row md:justify-between">
-            <div className="order-2 pt-10 flex-1 pl-25 md:order-1 md:max-w-[60%] md:pt-5">
+            <div className="order-2 pt-10 flex-1 pl-5 md:order-1 md:max-w-[60%] md:pt-5 md:pl-25">
               <h1 className="font-['Libre_Caslon_Text'] text-[1.8rem] font-bold tracking-[-0.02em] text-[var(--on-background)] md:text-[40px] md:leading-[52px]">
                 Hey, I&apos;m Albert
               </h1>

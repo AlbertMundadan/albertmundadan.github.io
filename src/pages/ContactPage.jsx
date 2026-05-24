@@ -41,7 +41,7 @@ function ContactPage() {
       <main className="flex-1 px-3.5 pt-12 pb-6 md:px-10 md:pt-16 md:pb-8">
         <section className="mx-auto max-w-[72rem]">
           <div className="mb-8 max-w-[36rem]">
-            <p className="font-['Space_Mono'] text-[1.9rem] font-bold uppercase tracking-[0.18em] text-[var(--secondary)]">
+            <p className="font-['Space_Mono'] text-[1.45rem] font-bold uppercase tracking-[0.18em] text-[var(--secondary)] md:text-[1.9rem]">
               Contact
             </p>
           </div>

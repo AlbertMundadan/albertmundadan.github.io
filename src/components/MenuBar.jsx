@@ -6,7 +6,7 @@ import { siteNavLinks } from '../siteNav.js'
 function getNavClass(isActive, size) {
   const baseClass =
     size === 'mobile'
-      ? "pl-3 font-['Space_Mono'] text-[9px] font-bold uppercase tracking-[0.16em] transition-all duration-300"
+      ? "pl-3 font-['Space_Mono'] text-[12px] font-bold uppercase tracking-[0.16em] transition-all duration-300"
       : "font-['Space_Mono'] text-[12px] font-bold uppercase tracking-[0.16em] transition-colors duration-500"
 
   if (size === 'mobile') {

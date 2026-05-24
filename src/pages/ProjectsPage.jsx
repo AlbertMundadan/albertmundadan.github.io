@@ -29,12 +29,12 @@ function ProjectsPage() {
 
   return (
     <div className="flex min-h-screen flex-col overflow-x-hidden bg-[var(--surface-container-lowest)] text-[var(--on-background)]">
-      <MenuBar />
+      <MenuBar fixed />
 
-      <main className="flex-1 px-3.5 py-12 md:px-10 md:py-16">
+      <main className="flex-1 px-3.5 py-12 pt-[calc(3.5rem+3rem)] md:px-10 md:py-16 md:pt-[calc(3.5rem+4rem)]">
         <section className="mx-auto max-w-[72rem]">
           <div className="mb-4">
-            <p className="font-['Space_Mono'] text-[1.9rem] font-bold uppercase tracking-[0.18em] text-[var(--secondary)]">
+            <p className="font-['Space_Mono'] text-[1.45rem] font-bold uppercase tracking-[0.18em] text-[var(--secondary)] md:text-[1.9rem]">
               Projects
             </p>
 
