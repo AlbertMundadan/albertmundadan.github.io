@@ -30,20 +30,20 @@ function MenuBar({ fixed = false }) {
       >
         <button
           type="button"
-          className="font-['Space_Mono'] text-[13px] font-bold uppercase tracking-[0.2em] text-[var(--on-surface-variant)] transition-colors hover:text-[var(--secondary)] md:hidden"
+          className="order-2 font-['Space_Mono'] text-[13px] font-bold uppercase tracking-[0.2em] text-[var(--on-surface-variant)] transition-colors hover:text-[var(--secondary)] md:hidden"
           onClick={() => setIsDrawerOpen(true)}
         >
           Menu
         </button>
-        <Link to="/" className="ml-auto md:ml-0">
+        <Link to="/" className="order-1 md:order-none">
           <img
             src={headerMark}
             alt="Albert Mundadan"
             className="h-4.5 w-auto object-contain md:h-[1.8rem]"
           />
         </Link>
-        <div className="flex items-center gap-3.5">
-          <nav className="hidden gap-8 md:flex">
+        <div className="hidden items-center gap-3.5 md:flex">
+          <nav className="gap-8 md:flex">
             {siteNavLinks.map((link) => (
               <NavLink
                 key={link.to}
