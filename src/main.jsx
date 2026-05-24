@@ -6,6 +6,7 @@ import App from './pages/App.jsx'
 import ContactPage from './pages/ContactPage.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
 import PlaceholderPage from './pages/PlaceholderPage.jsx'
+import ProjectsPage from './pages/ProjectsPage.jsx'
 import './styles.css'
 
 createRoot(document.getElementById('root')).render(
@@ -20,7 +21,7 @@ createRoot(document.getElementById('root')).render(
           />
           <Route
             path="/projects"
-            element={<PlaceholderPage title="Projects" />}
+            element={<ProjectsPage />}
           />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="*" element={<NotFoundPage />} />

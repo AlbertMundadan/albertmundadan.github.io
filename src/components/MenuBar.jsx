@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, NavLink } from 'react-router-dom'
 import headerMark from '../assets/images/Name.png'
 import { siteNavLinks } from '../siteNav.js'
 
@@ -22,11 +22,6 @@ function getNavClass(isActive, size) {
 
 function MenuBar({ fixed = false }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
-  const location = useLocation()
-
-  useEffect(() => {
-    setIsDrawerOpen(false)
-  }, [location.pathname])
 
   return (
     <>
@@ -88,6 +83,7 @@ function MenuBar({ fixed = false }) {
                 key={link.to}
                 to={link.to}
                 className={({ isActive }) => getNavClass(isActive, 'mobile')}
+                onClick={() => setIsDrawerOpen(false)}
               >
                 {link.label}
               </NavLink>

@@ -1,11 +1,11 @@
-import { MenuBar } from '../components/index.js'
+import { Footer, MenuBar } from '../components/index.js'
 
 function PlaceholderPage({ title }) {
   return (
-    <div className="min-h-screen bg-[var(--background)] text-[var(--on-background)]">
+    <div className="flex min-h-screen flex-col bg-[var(--background)] text-[var(--on-background)]">
       <MenuBar />
 
-      <main className="px-3.5 py-12 md:px-10 md:py-16">
+      <main className="flex-1 px-3.5 py-12 md:px-10 md:py-16">
         <section className="mx-auto max-w-[72rem]">
           <p className="font-['Space_Mono'] text-[0.72rem] font-bold uppercase tracking-[0.18em] text-[var(--secondary)]">
             {title}
@@ -15,6 +15,7 @@ function PlaceholderPage({ title }) {
           </h1>
         </section>
       </main>
+      <Footer />
     </div>
   )
 }

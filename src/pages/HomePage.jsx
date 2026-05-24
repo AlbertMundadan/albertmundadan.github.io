@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import resumePdf from '../assets/files/albert_mundadan_resume.pdf'
 import headshot from '../assets/images/Headshot.jpg'
-import { MenuBar, ProjectCard } from '../components/index.js'
+import { Footer, MenuBar, ProjectCard } from '../components/index.js'
 import projectData from '../data/projects.json'
 import experienceData from '../data/experience.json'
+import roleData from '../data/roles.json'
 import skillData from '../data/skills.json'
 import certificationData from '../data/certifications.json'
-import { siteNavLinks } from '../siteNav.js'
 
 const imageAssets = import.meta.glob('../assets/images/**/*', {
   eager: true,
@@ -28,7 +29,6 @@ const experience = experienceData.map((item, index) => ({
 }))
 
 const projectFilters = ['All', 'Software', 'Hardware', 'Data Science']
-
 function createPlaceholderProject(index) {
   return {
     id: `coming-soon-${index}`,
@@ -52,6 +52,9 @@ function getProjectLayout(width) {
 
 function HomePage() {
   const [activeProjectFilter, setActiveProjectFilter] = useState('All')
+  const [activeRoleIndex, setActiveRoleIndex] = useState(0)
+  const [typedRole, setTypedRole] = useState(() => roleData[0] ?? '')
+  const [isDeletingRole, setIsDeletingRole] = useState(false)
   const [projectLayout, setProjectLayout] = useState(() => {
     if (typeof window === 'undefined') {
       return { columns: 3, pageSize: 6 }
@@ -63,14 +66,70 @@ function HomePage() {
 
   useEffect(() => {
     const updateProjectLayout = () => {
-      setProjectLayout(getProjectLayout(window.innerWidth))
+      const nextLayout = getProjectLayout(window.innerWidth)
+
+      setProjectLayout((currentLayout) => {
+        if (currentLayout.pageSize !== nextLayout.pageSize) {
+          setCurrentProjectPage(0)
+        }
+
+        return currentLayout.columns === nextLayout.columns &&
+          currentLayout.pageSize === nextLayout.pageSize
+          ? currentLayout
+          : nextLayout
+      })
     }
 
-    updateProjectLayout()
     window.addEventListener('resize', updateProjectLayout)
 
     return () => window.removeEventListener('resize', updateProjectLayout)
   }, [])
+
+  useEffect(() => {
+    if (!roleData.length) {
+      return undefined
+    }
+
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    if (mediaQuery.matches) {
+      const timeoutId = window.setTimeout(() => {
+        setTypedRole(roleData[activeRoleIndex] ?? '')
+        setIsDeletingRole(false)
+      }, 0)
+
+      return () => window.clearTimeout(timeoutId)
+    }
+
+    const currentRole = roleData[activeRoleIndex] ?? ''
+    let timeoutDelay = isDeletingRole ? 40 : 85
+
+    if (!isDeletingRole && typedRole === currentRole) {
+      timeoutDelay = 1400
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      if (!isDeletingRole && typedRole === currentRole) {
+        setIsDeletingRole(true)
+        setTypedRole(currentRole.slice(0, -1))
+        return
+      }
+
+      if (isDeletingRole) {
+        if (typedRole.length === 0) {
+          setIsDeletingRole(false)
+          setActiveRoleIndex((index) => (index + 1) % roleData.length)
+          return
+        }
+
+        setTypedRole((role) => role.slice(0, -1))
+        return
+      }
+
+      setTypedRole(currentRole.slice(0, typedRole.length + 1))
+    }, timeoutDelay)
+
+    return () => window.clearTimeout(timeoutId)
+  }, [activeRoleIndex, isDeletingRole, typedRole])
 
   const filteredProjects =
     activeProjectFilter === 'All'
@@ -79,45 +138,38 @@ function HomePage() {
           project.categories?.includes(activeProjectFilter),
         )
 
-  const projectStartIndex = currentProjectPage * projectLayout.pageSize
   const totalProjectPages = Math.max(
     1,
     Math.ceil(filteredProjects.length / projectLayout.pageSize),
   )
-
-  useEffect(() => {
-    setCurrentProjectPage((page) => Math.min(page, totalProjectPages - 1))
-  }, [totalProjectPages])
-
-  useEffect(() => {
-    setCurrentProjectPage(0)
-  }, [activeProjectFilter, projectLayout.pageSize])
+  const visibleProjectPage = Math.min(currentProjectPage, totalProjectPages - 1)
 
   const visibleProjects = filteredProjects.slice(
-    projectStartIndex,
-    projectStartIndex + projectLayout.pageSize,
+    visibleProjectPage * projectLayout.pageSize,
+    visibleProjectPage * projectLayout.pageSize + projectLayout.pageSize,
   )
   const paddedVisibleProjects = [
     ...visibleProjects,
     ...Array.from(
       { length: Math.max(0, projectLayout.pageSize - visibleProjects.length) },
-      (_, index) => createPlaceholderProject(projectStartIndex + index),
+      (_, index) =>
+        createPlaceholderProject(visibleProjectPage * projectLayout.pageSize + index),
     ),
   ]
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[var(--background)] text-[var(--on-background)]">
+    <div className="flex min-h-screen flex-col overflow-x-hidden bg-[var(--background)] text-[var(--on-background)]">
       <MenuBar fixed />
 
-      <main className="relative pt-13">
+      <main className="relative flex-1 pt-13">
         <section className="backdrop-glow relative px-3.5 py-14 pt-9 md:px-10 md:py-14">
           <div className="mx-auto flex max-w-[72rem] flex-col gap-5 md:flex-row md:justify-between">
             <div className="order-2 pt-10 flex-1 pl-25 md:order-1 md:max-w-[60%] md:pt-5">
               <h1 className="font-['Libre_Caslon_Text'] text-[1.8rem] font-bold tracking-[-0.02em] text-[var(--on-background)] md:text-[40px] md:leading-[52px]">
-                Hey, I&apos;m Albert.
+                Hey, I&apos;m Albert
               </h1>
-              <h1 className="font-['Libre_Caslon_Text'] text-[1.9rem] tracking-[-0.02em] text-[var(--on-background)] md:text-[27px] md:leading-[38px]">
-                I&apos;m a designer.
+              <h1 className="font-['Libre_Caslon_Text'] text-[1.7rem] tracking-[-0.02em] text-[var(--on-background)] md:text-[25px] md:leading-[38px]">
+                I&apos;m a {typedRole}
                 <span className="animate-pulse text-[var(--tertiary)]">|</span>
               </h1>
               <div className="mt-2 max-w-[32rem] border-l border-[color:var(--outline-variant)]/30 pl-4.5">
@@ -129,7 +181,9 @@ function HomePage() {
               </div>
               <div className="mt-3.5 flex flex-wrap items-center gap-2.5">
                 <a
-                  href="#experience"
+                  href={resumePdf}
+                  target="_blank"
+                  rel="noreferrer"
                   className="inline-flex items-center gap-1.5 rounded-full bg-[var(--secondary)] px-3.5 py-1.5 font-['Space_Mono'] text-[0.75rem] font-bold uppercase tracking-[0.12em] text-[var(--primary-container)] shadow-[0_0_12px_rgba(200,198,197,0.16)] transition-transform hover:scale-[1.02]"
                 >
                   Resume
@@ -176,7 +230,10 @@ function HomePage() {
                 <button
                   key={filter}
                   type="button"
-                  onClick={() => setActiveProjectFilter(filter)}
+                  onClick={() => {
+                    setActiveProjectFilter(filter)
+                    setCurrentProjectPage(0)
+                  }}
                   className={`rounded-full px-3 py-1.5 font-['Space_Mono'] text-[0.63rem] font-bold uppercase tracking-[0.12em] transition-colors ${
                     activeProjectFilter === filter
                       ? 'bg-[var(--secondary)] text-[var(--primary-container)]'
@@ -207,7 +264,7 @@ function HomePage() {
                 onClick={() =>
                   setCurrentProjectPage((page) => Math.max(0, page - 1))
                 }
-                disabled={currentProjectPage === 0}
+                disabled={visibleProjectPage === 0}
                 className="inline-flex h-8 w-8 items-center justify-center text-[var(--secondary)] transition-colors hover:text-[var(--on-background)] disabled:cursor-not-allowed disabled:text-[color:var(--outline)]/40 disabled:hover:text-[color:var(--outline)]/40"
               >
                 <span aria-hidden="true" className="text-[1.35rem] leading-none">
@@ -221,10 +278,10 @@ function HomePage() {
                     key={`project-page-${index + 1}`}
                     type="button"
                     aria-label={`Go to project page ${index + 1}`}
-                    aria-current={currentProjectPage === index ? 'page' : undefined}
+                    aria-current={visibleProjectPage === index ? 'page' : undefined}
                     onClick={() => setCurrentProjectPage(index)}
                     className={
-                      currentProjectPage === index
+                      visibleProjectPage === index
                         ? 'h-2 w-5 rounded-full bg-[var(--secondary)]'
                         : 'h-2 w-2 rounded-full bg-[color:var(--on-primary-container)]/40 transition-colors hover:bg-[color:var(--secondary)]/60'
                     }
@@ -240,7 +297,7 @@ function HomePage() {
                     Math.min(totalProjectPages - 1, page + 1),
                   )
                 }
-                disabled={currentProjectPage === totalProjectPages - 1}
+                disabled={visibleProjectPage === totalProjectPages - 1}
                 className="inline-flex h-8 w-8 items-center justify-center text-[var(--secondary)] transition-colors hover:text-[var(--on-background)] disabled:cursor-not-allowed disabled:text-[color:var(--outline)]/40 disabled:hover:text-[color:var(--outline)]/40"
               >
                 <span aria-hidden="true" className="text-[1.35rem] leading-none">
@@ -326,12 +383,14 @@ function HomePage() {
               ))}
 
               <div className="pt-1">
-                <button
-                  type="button"
+                <a
+                  href={resumePdf}
+                  target="_blank"
+                  rel="noreferrer"
                   className="border border-[var(--secondary)] px-5 py-2.5 font-['Space_Mono'] text-[0.68rem] font-bold uppercase tracking-[0.16em] text-[var(--secondary)] transition-all duration-300 hover:bg-[var(--secondary)] hover:text-[var(--primary-container)]"
                 >
                   View Full Resume
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -401,25 +460,7 @@ function HomePage() {
         </section>
       </main>
 
-      <footer className="flex w-full flex-col items-center justify-between gap-5 border-t border-[color:var(--outline-variant)]/10 bg-[var(--surface-container-lowest)] px-3.5 py-5 md:flex-row md:px-10">
-        <span className="font-['Libre_Caslon_Text'] text-[1.05rem] tracking-tight text-[var(--on-background)]">
-          ALBERT
-        </span>
-        <div className="flex flex-wrap justify-center gap-5">
-          {siteNavLinks.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className="font-['Space_Mono'] text-[8px] font-bold uppercase tracking-[0.16em] text-[var(--outline)] transition-colors hover:text-[var(--on-background)]"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
-        <p className="font-['Space_Mono'] text-[7px] uppercase tracking-[0.16em] text-[var(--outline)]">
-          © 2026 Albert Mundadan All Rights Reserved.
-        </p>
-      </footer>
+      <Footer />
     </div>
   )
 }
