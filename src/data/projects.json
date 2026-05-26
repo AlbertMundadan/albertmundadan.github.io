@@ -3,7 +3,7 @@
     "title": "HQG Dashboard",
     "categories": ["Software", "Data Science"],
     "description": "An internal web platform for the Husky Quantitative Group / UConn. It provides a unified interface for managing live portfolios.",
-    "tags": ["Next.js", "Tailwind", "Supabase", "AWS", "Docker", "React.js"],
+    "tags": ["Tailwind", "AWS", "Docker", "React.js", "APIs"],
     "icon": "◉",
     "imageSrc": "HQG_DB_preview.png",
     "code": "https://github.com/Husky-Quantitative-Group/hqg-dashboard"
@@ -14,50 +14,60 @@
     "description": "Designed and constructed an analog-to-digital converter using op-amps to provide a visual representation of environmental conditions.",
     "tags": ["LTSpice", "Hardware", "Circuit Design"],
     "icon": "+",
-    "imageSrc": "temp_light_ADC.png",
+    "imageSrc": "temp_light_ADC_preview.png",
     "code": ""
   },
   {
-    "title": "Echo Analytics",
-    "categories": ["Data Science", "Software"],
-    "description": "A powerful data visualization dashboard tailored for enterprise-scale marketing teams.",
-    "tags": ["Vue.js", "D3.js", "Python"],
-    "icon": "▣",
-    "imageSrc": "",
-    "code": ""
-  },
-  {
-    "title": "Nexus UI",
+    "title": "Stock Buddy",
     "categories": ["Software"],
-    "description": "An open-source component library prioritizing accessibility and cinematic motion design.",
-    "tags": ["React", "Framer", "Storybook"],
-    "icon": "◇",
-    "imageSrc": "",
+    "description": "A web platform that provides real-time stock data and news.",
+    "tags": ["React.js", "Tailwind", "JavaScript", "Figma"],
+    "icon": "▣",
+    "imageSrc": "stock_buddy_preview.png",
     "code": ""
   },
   {
-    "title": "Echo Analytics",
-    "categories": ["Data Science", "Software"],
-    "description": "A powerful data visualization dashboard tailored for enterprise-scale marketing teams.",
-    "tags": ["Vue.js", "D3.js", "Python"],
+    "title": "Wireless Audio Reciever/Transmitter",
+    "categories": ["Hardware"],
+    "description": "A wireless optical audio transmitter and receiver system designed to transmit audio signals up to 200 feet using lasers and solar cells. Includes adjustable gain and microphone/aux inputs.",
+    "tags": ["Circuit Design", "Hardware", "LTSpice"],
+    "icon": "◇",
+    "imageSrc": "wireless_audio_preview.png",
+    "code": ""
+  },
+
+  {
+    "title": "Sprig",
+    "categories": ["Hardware", "Software"],
+    "description": "A mini game console built on a custom PCBusing a Raspberry Pi Pico and a 4-button input system. Runs games written in JavaScript.",
+    "tags": [],
     "icon": "▣",
     "imageSrc": "",
     "code": ""
   },
     {
-    "title": "Echo Analytics",
-    "categories": ["Data Science", "Software"],
-    "description": "A powerful data visualization dashboard tailored for enterprise-scale marketing teams.",
-    "tags": ["Vue.js", "D3.js", "Python"],
+    "title": "Blot",
+    "categories": ["Hardware", "Software"],
+    "description": "Plotting bot using 2 axis stepper motors and a pen to create physical drawings from digital instructions.",
+    "tags": [],
     "icon": "▣",
     "imageSrc": "",
     "code": ""
   },
-  {
-    "title": "Echo Analytics",
-    "categories": ["Data Science", "Software"],
-    "description": "A powerful data visualization dashboard tailored for enterprise-scale marketing teams.",
-    "tags": ["Vue.js", "D3.js", "Python"],
+    {
+    "title": "AI Air Traffic Control",
+    "categories": ["Software"],
+    "description": "Prototyped and pitched an AI-driven Air Traffic Control System that converts and transcribes audio, minimizing auditory miscommunication.",
+    "tags": [],
+    "icon": "▣",
+    "imageSrc": "",
+    "code": ""
+  },
+      {
+    "title": "Electronic Stylophone",
+    "categories": ["Hardware"],
+    "description": "Constructed a battery powered stylophone by soldering surface mounted electronic components onto a custom PCB and implemented controls for adjustable volume and pitch.",
+    "tags": [],
     "icon": "▣",
     "imageSrc": "",
     "code": ""
